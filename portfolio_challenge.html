@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Challenge</title>
+
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        header {
+            width: 100%;
+            background-color: white;
+            border-bottom: 1px solid black;
+            padding: 10px 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            padding: 5px 80px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: gray;
+        }
+
+        #game {
+            background-color: #ffffff;
+            margin: 50px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #game-container {
+            background-color: #ffffff;
+            padding: 80px;
+            border-radius: 8px;
+            border: 1px solid black;
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        button,
+        input[type="number"] {
+            background-color: transparent;
+            color: #000000;
+            border: 1px solid #000000;
+            padding: 12px 25px;
+            margin: 10px 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+            text-align: center;
+        }
+
+        button:hover,
+        input[type="number"]:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        button.correct,
+        input.correct {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+        }
+
+        button.incorrect,
+        input.incorrect {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+        }
+
+        button:disabled,
+        input:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        input[type="number"] {
+            width: 200px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px; 
+            border: 1px solid #000000;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 0; 
+            background-color: transparent;
+        }
+
+        .progress-inner {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border-radius: 50px;
+        }
+
+        .progress {
+            background-color: #000000; /* Schwarzer Fortschrittsbalken */
+            height: 100%;
+            border-radius: 50px;
+            transition: width 0.4s ease;
+        }
+
+        #score {
+            font-size: 1.1em;
+            color: #000000;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #000000;
+        }
+        
+        #custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 1px solid black;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        transition: transform 0.1s ease;
+        z-index: 9999; 
+        }
+
+        #custom-cursor.pulse {
+        animation: pulse 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+
+        footer {
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 40px 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: grey;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+        <nav>
+            <div class="logo">
+             <img src="Dateien/Logo.png" alt="Logo" style="height: 70px;" >
+            </div>
+            <div class="nav-links">
+                <a href="w3_challenge.html">w3 Challenge</a>
+                <a href="portfolio_challenge.html">Portfolio Challenge</a>
+                <a href="portfolio.html">Portfolio</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Spiel Oberfläche -->
+    <section id="game">
+        <div id="game-container">
+            <h1>Portfolio Challenge</h1>
+            <div class="progress-bar-container">
+                <div class="progress-inner">
+                    <div id="progress" class="progress"></div>
+                </div>
+            </div>
+            <div id="score">Punkte: 0</div>
+            <div id="game-area">
+                <p>Willkommen zur Portfolio Challenge. Wie gut kennen Sie mich?</p>
+                <button onclick="startGame()">Spiel starten</button>
+            </div>
+            <div id="feedback"></div>
+        </div>
+    </section>
+
+    <div id="custom-cursor"></div>
+
+    <footer>
+        <p>&copy; 2024 Lukas Viernickel — Alle Rechte vorbehalten. | <a href="https://www.lukasviernickel.de/index.html" target="_blank">Weiter zu meiner Webseite</a></p>
+    </footer>
+
+<script>
+        let currentLevel = 0;
+        let score = 0;
+        let highScores = [];
+        let answered = false; // Variable zur Überprüfung, ob eine Antwort gegeben wurde
+        const levels = [
+            {
+                question: "Welches Projekt beinhaltet die Entwicklung von Etiketten für Craft-Beer-Sorten?",
+                options: ["ase jewels", "Mannheim im Einklang", "Fantasy-Schach", "Biernickel"],
+                correctAnswer: 3
+            },
+            {
+                question: "Bei wie vielen Agenturen habe ich bereits Praktika absolviert?",
+                type: "number-guessing",
+                correctAnswer: 3,
+                maxAttempts: 3
+            },
+            {
+                question: "Für welche Marke habe ich ein Corporate Design im Bereich Snowboarding entwickelt?",
+                options: ["Rove", "ase jewels", "deep forward", "LockerRoom"],
+                correctAnswer: 0
+            },
+            {
+                question: "Wie heißt das Projekt, das eine 360°-Animation für das Planetarium Mannheim beinhaltet?",
+                options: ["Eine Reise durch Mannheim", "360°-Mannheim", "Mannheim im Einklang", "Der Klang von Mannheim"],
+                correctAnswer: 2
+            },
+            {
+                question: "Welche Software gehört zu meinen Fähigkeiten?",
+                options: ["Sketch", "Blender", "PHP", "Python"],
+                correctAnswer: 1
+            },
+            {
+                question: "Welches Logo wurde für eine Gemeinde erstellt?",
+                options: ["St. Peter und Paul", "deep forward", "ase jewels", "LockerRoom"],
+                correctAnswer: 0
+            },
+            {
+                question: "Wie viele Jahre habe ich als Freelancer gearbeitet?",
+                type: "number-guessing",
+                correctAnswer: 1,
+                maxAttempts: 3
+            },
+            {
+                question: "Welches Projekt widmet sich der mentalen Gesundheit bei jungen Männern?",
+                options: ["deep forward", "LockerRoom", "Praxis für Psychotherapie", ".vap"],
+                correctAnswer: 1
+            },
+            {
+                question: "Welche Art von Produktdesign ist im ase jewels Projekt enthalten?",
+                options: ["Entwicklung einer Bierflasche", "Design eines Schmuckstücks und der Verpackung", "Gestaltung einer Buchjacke", "Redesign einer Webseite"],
+                correctAnswer: 1
+            },
+            {
+                question: "Was beschreibt das Projekt Katakana Broschüre?",
+                options: ["Eine Broschüre über ein fremdes Schriftsystem", "Gestaltung eines Flyers für einen Förderverein", "Erstellung von Postkarten für die katholische Kirche", "Design einer Buchjacke zu einem gesellschaftlichen Tabuthema"],
+                correctAnswer: 0
+            }
+        ];
+
+        function startGame() {
+            currentLevel = 0;
+            score = 0;
+            answered = false; // Zurücksetzen der Antwortvariable
+            updateScore();
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentLevel >= levels.length) {
+                endGame();
+                return;
+            }
+
+            const level = levels[currentLevel];
+            answered = false; // Zurücksetzen, wenn eine neue Frage gezeigt wird
+            let html = `<h2>Level ${currentLevel + 1}</h2>`;
+
+            if (level.type === "number-guessing") {
+                html += `<p>${level.question}</p>`;
+                html += `<div class="number-input-container">`;
+                html += `<input type="number" id="userGuess" placeholder="Gib deine Zahl ein" min="1" max="10">`;
+                html += `</div>`;
+                html += `<button onclick="checkGuess()">Raten</button>`;
+                html += `<p id="attemptsLeft"></p>`; // Anzeige der verbleibenden Versuche
+            } else {
+                html += `<p>${level.question}</p><div class="button-container">`;
+                level.options.forEach((option, index) => {
+                    html += `<button id="option${index}" onclick="checkAnswer(${index})">${option}</button>`;
+                });
+                html += `</div>`;
+            }
+
+            document.getElementById('game-area').innerHTML = html;
+            updateProgress();
+
+            // Für das Zahlenraten-Spiel die Anzahl der Versuche zurücksetzen
+            if (level.type === "number-guessing") {
+                level.attempts = level.maxAttempts; // maximale Versuche setzen
+                updateAttempts();
+            }
+        }
+
+        function checkAnswer(answerIndex) {
+            if (answered) return; // Keine weitere Auswahl zulassen
+            answered = true; // Setzt die Antwort auf "gegeben"
+
+            const level = levels[currentLevel];
+            const correctButton = document.getElementById(`option${level.correctAnswer}`);
+            const selectedButton = document.getElementById(`option${answerIndex}`);
+
+            if (answerIndex === level.correctAnswer) {
+                correctButton.classList.add('correct'); // Richtig: Grün
+                score += 10;
+            } else {
+                correctButton.classList.add('correct'); // Richtige Antwort Grün
+                selectedButton.classList.add('incorrect'); // Falsche Antwort Rot
+            }
+
+            document.querySelectorAll('button').forEach(button => button.disabled = true); // Alle Buttons deaktivieren
+            updateScore();
+
+            setTimeout(() => {
+                currentLevel++;
+                showQuestion();
+            }, 1500);
+        }
+
+        function checkGuess() {
+            const level = levels[currentLevel];
+            const userGuess = parseInt(document.getElementById('userGuess').value);
+            const inputField = document.getElementById('userGuess'); // Hole das Eingabefeld
+
+            if (isNaN(userGuess)) {
+                document.getElementById('feedback').innerText = "Bitte gib eine Zahl ein.";
+                return;
+            }
+
+            if (userGuess === level.correctAnswer) {
+                inputField.classList.add('correct'); // Färbe das Eingabefeld grün
+                score += 10;
+                updateScore();
+                document.getElementById('feedback').innerText = "Richtig! Du hast die Zahl erraten.";
+                currentLevel++;
+                setTimeout(showQuestion, 1500);
+            } else {
+                inputField.classList.add('incorrect'); // Färbe das Eingabefeld rot
+                level.attempts--; // Einen Versuch abziehen
+                document.getElementById('feedback').innerText = "Falsch! Versuche es nochmal.";
+                updateAttempts();
+
+                if (level.attempts === 0) {
+                    document.getElementById('feedback').innerText = "Keine Versuche mehr! Die richtige Zahl war " + level.correctAnswer + ".";
+                    currentLevel++; // Zur nächsten Frage weiterleiten
+                    setTimeout(showQuestion, 1500);
+                }
+            }
+        }
+
+        function updateAttempts() {
+            const level = levels[currentLevel];
+            document.getElementById('attemptsLeft').innerText = `Verbleibende Versuche: ${level.attempts}`;
+        }
+
+        function updateScore() {
+            document.getElementById('score').innerText = `Punkte: ${score}`;
+        }
+
+        function updateProgress() {
+            const progressPercent = ((currentLevel + 1) / levels.length) * 100;
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+        }
+
+        function endGame() {
+            highScores.push(score);
+            highScores.sort((a, b) => b - a);
+
+            let highScoreList = "";
+            highScores.slice(0, 5).forEach(highScore => {
+                highScoreList += `${highScore} Punkte<br>`; // Punkte ohne Aufzählungszeichen
+            });
+
+            document.getElementById('game-area').innerHTML = `
+                <h2>Spiel beendet!</h2>
+                <p>Du hast die w3 Digital Growth Challenge abgeschlossen.</p>
+                <p>Deine Punkte: ${score}</p>
+                <h3>High Scores:</h3>
+                ${highScoreList}
+                <button onclick="location.reload()">Nochmal spielen</button>
+            `;
+        }
+
+        const cursor = document.getElementById('custom-cursor');
+
+            document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 15 + 'px';
+            cursor.style.top = e.clientY - 15 + 'px';
+
+            const element = document.elementFromPoint(e.clientX, e.clientY);
+            if (element) {
+            const bgColor = window.getComputedStyle(element).backgroundColor;
+            const brightness = getBrightness(bgColor);
+            cursor.style.backgroundColor = brightness > 128 ? 'black' : 'white';
+            }
+        });
+
+        function getBrightness(color) {
+            const rgb = color.match(/\d+/g);
+            if (rgb) {
+                return (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+            }
+            return 0;
+        }
+
+    </script>
+</body>
+</html>

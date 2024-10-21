@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>w3 Digital Growth Challenge</title>
+
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        header {
+            width: 100%;
+            background-color: white;
+            border-bottom: 1px solid black;
+            padding: 10px 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            padding: 5px 80px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: gray;
+        }
+
+        .carousel-container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            position: relative;
+            width: 80vw;
+            height: 80vh;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid black;
+            color: black;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .carousel-button:hover {
+            background-color: black;
+            color: white;
+        }
+        .carousel-button.left {
+            left: 10px;
+        }
+        .carousel-button.right {
+            right: 10px;
+        }
+        
+        #custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 1px solid black;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        }
+
+        #custom-cursor.pulse {
+        animation: pulse 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+
+        footer {
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 40px 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: grey;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+             <img src="Dateien/Logo.png" alt="Logo" style="height: 70px;" >
+            </div>
+            <div class="nav-links">
+                <a href="w3_challenge.html">w3 Challenge</a>
+                <a href="portfolio_challenge.html">Portfolio Challenge</a>
+                <a href="portfolio.html">Portfolio</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <!-- Slides -->
+        </div>
+        <button class="carousel-button left">❮</button>
+        <button class="carousel-button right">❯</button>
+    </div>
+
+    <div id="custom-cursor"></div>
+
+    <footer>
+        <p>&copy; 2024 Lukas Viernickel — Alle Rechte vorbehalten. | <a href="https://www.lukasviernickel.de/index.html" target="_blank">Weiter zu meiner Webseite</a></p>
+    </footer>
+
+<script>
+        const slides = [
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_01.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_02.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_03.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_04.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_05.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_06.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_07.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_08.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_09.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_10.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_11.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_12.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_13.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_14.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_15.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_16.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_17.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_18.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_19.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_20.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_21.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_22.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_23.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_24.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_25.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_26.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_27.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_28.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_29.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_30.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_31.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_32.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_33.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_34.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_35.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_36.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_37.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_38.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_39.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_40.png",
+            "Dateien/Portfolio_Viernickel_Lukas_15102024_Seite_41.png"
+        ];
+
+        let currentSlide = 0;
+        let autoSlideInterval;
+        const track = document.querySelector('.carousel-track');
+
+        // Füge alle Slides zum Track hinzu
+        slides.forEach((slide, index) => {
+            const slideElement = document.createElement('div');
+            slideElement.className = 'carousel-slide';
+            slideElement.innerHTML = `<img src="${slide}" alt="Seite ${index + 1}">`;
+            track.appendChild(slideElement);
+        });
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlide();
+            resetAutoSlide();
+        }
+
+        function updateSlide() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function autoSlide() {
+            changeSlide(1);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(autoSlide, 15000); // 15 Sekunden
+        }
+
+        document.querySelector('.carousel-button.left').addEventListener('click', () => changeSlide(-1));
+        document.querySelector('.carousel-button.right').addEventListener('click', () => changeSlide(1));
+
+        resetAutoSlide();
+
+        const cursor = document.getElementById('custom-cursor');
+
+            document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 15 + 'px';
+            cursor.style.top = e.clientY - 15 + 'px';
+
+            const element = document.elementFromPoint(e.clientX, e.clientY);
+            if (element) {
+            const bgColor = window.getComputedStyle(element).backgroundColor;
+            const brightness = getBrightness(bgColor);
+            cursor.style.backgroundColor = brightness > 128 ? 'black' : 'white';
+            }
+        });
+
+        function getBrightness(color) {
+            const rgb = color.match(/\d+/g);
+            if (rgb) {
+                return (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+            }
+            return 0;
+        }
+
+    </script>
+</body>
+</html>
