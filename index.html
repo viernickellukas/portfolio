@@ -270,6 +270,21 @@
         <button class="carousel-button right">❯</button>
     </div>
 
+   <div style="text-align: center; margin: 40px 0;">
+    <p style="margin-bottom: 20px; font-size: 18px;">Sie haben noch nicht genug davon bekommen? Hier bekommen Sie mein Portfolio als PDF:</p>
+    <button id="downloadButton" style="
+        padding: 12px 24px;
+        font-size: 16px;
+        color: black;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    ">Hier gehts zu meinen Arbeiten</button>
+    <p id="confirmationMessage" style="display: none; margin-top: 20px; color: grey;">Ich hoffe Ihnen gefallen meine Arbeiten</p>
+</div>
+
     <div id="custom-cursor"></div>
 
     <footer>
@@ -383,6 +398,34 @@
         const navLinks = document.getElementById("navLinks");
         navLinks.classList.toggle("show");
     }
+
+        const   downloadButton = document.getElementById("downloadButton");
+                downloadButton.addEventListener("mouseenter", function() {
+                downloadButton.style.backgroundColor = "black";
+                downloadButton.style.color = "white";
+            });
+                downloadButton.addEventListener("mouseleave", function() {
+                downloadButton.style.backgroundColor = "white";
+                downloadButton.style.color = "black";
+        });
+
+    document.getElementById("downloadButton").addEventListener("click", function() {
+        
+        const pdfUrl = "Dateien/Portfolio_Viernickel_Lukas_15102024.pdf"; 
+        const link = document.createElement("a");
+        link.href = pdfUrl;
+        link.download = "Portfolio_Viernickel_Lukas_15102024.pdf";
+        link.click();
+
+        
+        const confirmationMessage = document.getElementById("confirmationMessage");
+        confirmationMessage.style.display = "block";
+
+        
+        setTimeout(() => {
+            confirmationMessage.style.display = "none";
+        }, 6000);
+    });
 
     </script>
 </body>
