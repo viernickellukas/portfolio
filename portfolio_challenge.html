@@ -67,13 +67,13 @@
         /* Game Container */
         #game-container {
             background-color: #ffffff;
-            padding: 20px;
+            padding: 40px;
             border-radius: 8px;
             border: 1px solid black;
             text-align: center;
             width: 85%; /* Make container narrower */
             max-width: 500px;
-            margin: 20px auto;
+            margin: 90px auto;
         }
 
         #custom-cursor {
@@ -121,6 +121,19 @@
         input[type="number"] {
             width: 80%;
         }
+
+        .correct {
+            background-color: green !important;
+            color: white;
+            border-color: green;
+        }
+
+        .incorrect {
+            background-color: red !important;
+            color: white;
+            border-color: red;
+        }
+
 
         /* Progress Bar */
         .progress-bar-container {
@@ -218,7 +231,7 @@
         <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
         <div class="nav-links" id="navLinks">
             <a href="portfolio_challenge.html">Portfolio Challenge</a>
-            <a href="portfolio.html">Portfolio</a>
+            <a href="index.html">Portfolio</a>
         </div>
     </nav>
     </header>
@@ -251,7 +264,7 @@
         let currentLevel = 0;
         let score = 0;
         let highScores = [];
-        let answered = false; // Variable zur Überprüfung, ob eine Antwort gegeben wurde
+        let answered = false; 
         const levels = [
             {
                 question: "Welches Projekt beinhaltet die Entwicklung von Etiketten für Craft-Beer-Sorten?",
@@ -310,7 +323,7 @@
         function startGame() {
             currentLevel = 0;
             score = 0;
-            answered = false; // Zurücksetzen der Antwortvariable
+            answered = false; 
             updateScore();
             showQuestion();
         }
@@ -322,7 +335,7 @@
             }
 
             const level = levels[currentLevel];
-            answered = false; // Zurücksetzen, wenn eine neue Frage gezeigt wird
+            answered = false; 
             let html = `<h2>Level ${currentLevel + 1}</h2>`;
 
             if (level.type === "number-guessing") {
@@ -331,7 +344,7 @@
                 html += `<input type="number" id="userGuess" placeholder="Gib deine Zahl ein" min="1" max="10">`;
                 html += `</div>`;
                 html += `<button onclick="checkGuess()">Raten</button>`;
-                html += `<p id="attemptsLeft"></p>`; // Anzeige der verbleibenden Versuche
+                html += `<p id="attemptsLeft"></p>`; 
             } else {
                 html += `<p>${level.question}</p><div class="button-container">`;
                 level.options.forEach((option, index) => {
@@ -345,25 +358,25 @@
 
             
             if (level.type === "number-guessing") {
-                level.attempts = level.maxAttempts; // maximale Versuche setzen
+                level.attempts = level.maxAttempts; 
                 updateAttempts();
             }
         }
 
         function checkAnswer(answerIndex) {
-            if (answered) return; // Keine weitere Auswahl zulassen
-            answered = true; // Setzt die Antwort auf "gegeben"
+            if (answered) return; 
+            answered = true; 
 
             const level = levels[currentLevel];
             const correctButton = document.getElementById(`option${level.correctAnswer}`);
             const selectedButton = document.getElementById(`option${answerIndex}`);
 
             if (answerIndex === level.correctAnswer) {
-                correctButton.classList.add('correct'); // Richtig: Grün
+                correctButton.classList.add('correct'); 
                 score += 10;
             } else {
-                correctButton.classList.add('correct'); // Richtige Antwort Grün
-                selectedButton.classList.add('incorrect'); // Falsche Antwort Rot
+                correctButton.classList.add('correct'); 
+                selectedButton.classList.add('incorrect'); 
             }
 
             document.querySelectorAll('button').forEach(button => button.disabled = true); // Alle Buttons deaktivieren
@@ -378,7 +391,7 @@
         function checkGuess() {
             const level = levels[currentLevel];
             const userGuess = parseInt(document.getElementById('userGuess').value);
-            const inputField = document.getElementById('userGuess'); // Hole das Eingabefeld
+            const inputField = document.getElementById('userGuess'); 
 
             if (isNaN(userGuess)) {
                 document.getElementById('feedback').innerText = "Bitte gib eine Zahl ein.";
@@ -386,21 +399,21 @@
             }
 
             if (userGuess === level.correctAnswer) {
-                inputField.classList.add('correct'); // Färbe das Eingabefeld grün
+                inputField.classList.add('correct'); 
                 score += 10;
                 updateScore();
-                document.getElementById('feedback').innerText = "Richtig! Du hast die Zahl erraten.";
+                document.getElementById('feedback').innerText = "Richtig! Das war die korrekte Antwort.";
                 currentLevel++;
                 setTimeout(showQuestion, 1500);
             } else {
-                inputField.classList.add('incorrect'); // Färbe das Eingabefeld rot
-                level.attempts--; // Einen Versuch abziehen
+                inputField.classList.add('incorrect'); 
+                level.attempts--; 
                 document.getElementById('feedback').innerText = "Falsch! Versuche es nochmal.";
                 updateAttempts();
 
                 if (level.attempts === 0) {
                     document.getElementById('feedback').innerText = "Keine Versuche mehr! Die richtige Zahl war " + level.correctAnswer + ".";
-                    currentLevel++; // Zur nächsten Frage weiterleiten
+                    currentLevel++; 
                     setTimeout(showQuestion, 1500);
                 }
             }
@@ -426,7 +439,7 @@
 
             let highScoreList = "";
             highScores.slice(0, 5).forEach(highScore => {
-                highScoreList += `${highScore} Punkte<br>`; // Punkte ohne Aufzählungszeichen
+                highScoreList += `${highScore} Punkte<br>`; 
             });
 
             document.getElementById('game-area').innerHTML = `
@@ -438,6 +451,36 @@
                 <button onclick="location.reload()">Nochmal spielen</button>
             `;
         }
+
+        function checkAnswer(answerIndex) {
+            if (answered) return; 
+            answered = true;
+
+            const level = levels[currentLevel];
+            const correctButton = document.getElementById(`option${level.correctAnswer}`);
+            const selectedButton = document.getElementById(`option${answerIndex}`);
+
+            document.getElementById('feedback').innerText = "";
+
+            if (answerIndex === level.correctAnswer) {
+                correctButton.classList.add('correct'); 
+                score += 10;
+            document.getElementById('feedback').innerText = "Richtig! Das war die korrekte Antwort.";
+            } else {
+            correctButton.classList.add('correct'); 
+            selectedButton.classList.add('incorrect'); 
+            document.getElementById('feedback').innerText = "Falsch! Probiere es später noch einmal.";
+            }
+
+            document.querySelectorAll('.button-container button').forEach(button => button.disabled = true);
+            updateScore();
+
+            setTimeout(() => {
+                currentLevel++;
+            showQuestion();
+            }, 1500);
+        }
+
 
         const cursor = document.getElementById('custom-cursor');
 
